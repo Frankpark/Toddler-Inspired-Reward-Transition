@@ -1,0 +1,12 @@
+setup.py
+s2d_vizdoom/__init__.py
+s2d_vizdoom.egg-info/PKG-INFO
+s2d_vizdoom.egg-info/SOURCES.txt
+s2d_vizdoom.egg-info/dependency_links.txt
+s2d_vizdoom.egg-info/top_level.txt
+s2d_vizdoom/mazeenv/__init__.py
+s2d_vizdoom/mazeenv/compile_acs.py
+s2d_vizdoom/mazeenv/maze.py
+s2d_vizdoom/mazeenv/mazeenv.py
+s2d_vizdoom/mazeenv/script_manipulator.py
+s2d_vizdoom/mazeenv/vizdoom_gym.py

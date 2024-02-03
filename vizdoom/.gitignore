@@ -1,0 +1,8 @@
+*__pycache__
+*.swp
+*wgt/
+*dbg*
+_vizdoom.ini
+*.zip
+out.txt
+log
