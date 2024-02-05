@@ -1,0 +1,441 @@
+//
+// Modified from https://github.com/microsoft/MazeExplorer/blob/master/mazeexplorer/content/acs_template.txt
+//
+
+#include "zcommon.acs"
+
+#define TARGET_ID_START 1000
+#define GOAL_TID 999
+
+int TARGET_ID_END = TARGET_ID_START;
+
+global int 0:reward;
+global int 1:goal_x;
+global int 2:goal_y;
+global int 3:goal_z;
+global int 4:map_level;
+global int 5:key_obj_idx;
+global int 6:last_obj_picked;
+global int 7:num_obj_spawn;
+global int 8:player_spawn_ok;
+global int 9:target0_x;    // TODO: horrible way of coding. if there was an alternative, I would choose that
+global int 10:target0_y;
+global int 11:target1_x;
+global int 12:target1_y;
+global int 13:target2_x;
+global int 14:target2_y;
+global int 15:target3_x;
+global int 16:target3_y;
+
+
+int target_id_offset = 10000;
+int target_id;
+bool obj_exists[ $num_keys ];
+
+int xmin = $xmin;
+int ymin = $ymin;
+int xmax = $xmax;
+int ymax = $ymax;
+
+int num_keys = $num_keys;
+bool random_key_textures = $random_key_textures;
+int num_key_textures[ $num_keys ] = $num_key_textures;
+str key_textures[ $num_keys ][ $max_category_size ] = $key_textures;
+int curr_key_textures[ $num_keys ];
+int default_key_textures[ $num_keys ] = $default_key_textures;
+int num_keys_used = $num_keys_used;
+int keys_used[ $num_keys_used ] = $keys_used;
+
+bool random_wall_texture = $random_wall_texture;
+bool random_ceiling_texture = $random_ceiling_texture;
+bool random_floor_texture = $random_floor_texture;
+str wall_texture_list[$num_wall_textures] = $wall_texture_list;
+str floor_texture_list[$num_floor_textures] = $floor_texture_list;
+str ceiling_texture_list[$num_ceiling_textures] = $ceiling_texture_list;
+int num_wall_textures = $num_wall_textures;
+int num_floor_textures = $num_floor_textures;
+int num_ceiling_textures = $num_ceiling_textures;
+
+int SPAWN_LOC_ID = 0;
+
+bool random_key_positions = $random_key_positions;
+bool use_key_boxes = $use_key_boxes;
+int num_boxes = $num_boxes;
+int key_boxes_x[ $num_boxes ][2] = $key_boxes_x;
+int key_boxes_y[ $num_boxes ][2] = $key_boxes_y;
+
+bool shuffle_obj_pos = $shuffle_obj_pos;
+int abs_keys_spawn_x[ $num_keys ] = { $abs_keys_spawn_x };
+int abs_keys_spawn_y[ $num_keys ] = { $abs_keys_spawn_y };
+
+bool random_spawn = $random_spawn;
+int abs_spawn_x = $abs_spawn_x;
+int abs_spawn_y = $abs_spawn_y;
+
+bool random_spawn_angle = $random_spawn_angle;
+int spawn_angle = $spawn_angle;
+
+int rand_queue_key[ $num_keys ];
+int rand_queue_box[ $num_boxes ];
+int queue_len;
+
+str temp_textures[5] = {"ASHWALL2", "ASHWALL3", "ASHWALL4", "ASHWALL6", "ASHWALL7"};
+int temp_textures_used[5] = {0, 0, 0, 0, 0};
+
+// int min_spawn_dist_from_player = FixedMul( $min_spawn_dist_from_player , $min_spawn_dist_from_player );
+// int min_spawn_dist_from_player = FixedMul(0.5, 0.5);
+int min_spawn_dist_from_player = $min_spawn_dist_from_player >> 16;  // truncated
+
+int player_x, player_y;
+
+str debug_print = "";
+
+function void addDebugPrint(str s_in)
+{
+    debug_print = StrParam(s: debug_print, s: s_in);
+}
+
+function void debugPrint(void)
+{
+    Print(s: debug_print);
+}
+
+function str PickTempTexture(void)
+{
+    for (int i = 0; i < 5; i += 1)
+    {
+        if (temp_textures_used[i] == 0)
+        {
+            temp_textures_used[i] = 1;
+            return temp_textures[i];
+        }
+    }
+    // we shouldn't reach here
+    return "STONE2";
+}
+
+function void _ReplaceTextures(str new_wall_texture, str new_ceiling_texture, str new_floor_texture) {
+    for (int i = 0; i < 5; i += 1)
+    {
+        if (temp_textures[i] == new_floor_texture ||
+            temp_textures[i] == new_ceiling_texture ||
+            temp_textures[i] == new_wall_texture)
+            temp_textures_used[i] = 1;
+    }
+
+    str temp_floor_texture = PickTempTexture();
+    str temp_ceiling_texture = PickTempTexture();
+
+    ReplaceTextures("CEIL5_2", temp_floor_texture);
+    ReplaceTextures("CEIL5_1", temp_ceiling_texture);
+    ReplaceTextures("STONE2", new_wall_texture);
+    ReplaceTextures(temp_floor_texture, new_floor_texture);
+    ReplaceTextures(temp_ceiling_texture, new_ceiling_texture);
+}
+
+function void SpawnKeyAbsPos(int pos_idx, int obj_idx)
+{
+    // addDebugPrint(StrParam(s:"\n", d:pos_idx, s:",", d:obj_idx));
+    str key_obj_texture = key_textures[obj_idx][curr_key_textures[obj_idx]];
+    bool is_target = (obj_idx == key_obj_idx);
+    int _obj_x, _obj_y;
+
+    _obj_x = abs_keys_spawn_x[pos_idx];
+    _obj_y = abs_keys_spawn_y[pos_idx];
+    if (is_target) {
+        goal_x = _obj_x;
+        goal_y = _obj_y;
+    }
+    switch (obj_idx) {
+        case 0:
+            target0_x = _obj_x;
+            target0_y = _obj_y;
+            break;
+        case 1:
+            target1_x = _obj_x;
+            target1_y = _obj_y;
+            break;
+        case 2:
+            target2_x = _obj_x;
+            target2_y = _obj_y;
+            break;
+        case 3:
+            target3_x = _obj_x;
+            target3_y = _obj_y;
+            break;
+    }
+
+    num_obj_spawn += Spawn(key_obj_texture, _obj_x, _obj_y, 0.0, target_id_offset + obj_idx, 128);
+    SetThingSpecial(target_id_offset + obj_idx, ACS_ExecuteAlways, 5);
+}
+
+function void SpawnKeyRandom(int obj_idx, int box_idx, str obj_texture)
+{
+    // addDebugPrint("Path2");
+    bool is_target = (obj_idx == key_obj_idx);
+    int _xmin, _xmax, _ymin, _ymax, _obj_x, _obj_y;
+    int xdist_sqr, ydist_sqr, dist_from_player_sqr;
+
+    if (box_idx == -1)  // don't use boxes, sample pos within entire map
+    {
+        _xmin = xmin;
+        _xmax = xmax;
+        _ymin = ymin;
+        _ymax = ymax;
+    }
+    else {  // use boxes, sample pos within given box
+        _xmin = key_boxes_x[box_idx][0];
+        _xmax = key_boxes_x[box_idx][1];
+        _ymin = key_boxes_y[box_idx][0];
+        _ymax = key_boxes_y[box_idx][1];
+    }
+
+    int threshold = min_spawn_dist_from_player * min_spawn_dist_from_player;
+
+    do {
+        _obj_x = Random(_xmin, _xmax);
+        _obj_y = Random(_ymin, _ymax);
+        xdist_sqr = (_obj_x >> 16) - (player_x >> 16);
+        xdist_sqr *= xdist_sqr;
+        ydist_sqr = (_obj_y >> 16) - (player_y >> 16);
+        ydist_sqr *= ydist_sqr;
+        dist_from_player_sqr = xdist_sqr + ydist_sqr;
+    } while (dist_from_player_sqr <= threshold);
+    addDebugPrint(StrParam(d: dist_from_player_sqr, s: "\n", d: threshold, s: "\n"));
+    addDebugPrint(StrParam(d: 4 * 4, s: "\n"));
+    
+    if (is_target) {
+        goal_x = _obj_x;
+        goal_y = _obj_y;
+    }
+    switch (obj_idx) {
+        case 0:
+            target0_x = _obj_x;
+            target0_y = _obj_y;
+            break;
+        case 1:
+            target1_x = _obj_x;
+            target1_y = _obj_y;
+            break;
+        case 2:
+            target2_x = _obj_x;
+            target2_y = _obj_y;
+            break;
+        case 3:
+            target3_x = _obj_x;
+            target3_y = _obj_y;
+            break;
+    }
+
+    num_obj_spawn += SpawnForced(obj_texture, _obj_x, _obj_y, 0.0, target_id_offset + obj_idx, 128);
+    SetThingSpecial(target_id_offset + obj_idx, ACS_ExecuteAlways, 5);
+}
+
+function void init_queue(bool is_for_box)
+{
+    int i;
+    if (is_for_box)
+    {
+        queue_len = num_boxes;
+        for (i = 0; i < queue_len; i++)
+        {
+            rand_queue_box[i] = i;
+        }
+    }
+    else
+    {
+        queue_len = num_keys;
+        for (i = 0; i < queue_len; i++)
+        {
+            rand_queue_key[i] = i;
+        }
+    }
+}
+
+function int sample_wo_repl(bool is_for_box)
+{
+    int idx = Random(0, queue_len - 1);
+    int ret, i;
+
+    if (is_for_box)
+    {
+        ret = rand_queue_box[idx];
+        for (i = idx + 1; i < queue_len; i++)
+        {
+            rand_queue_box[i - 1] = rand_queue_box[i];
+        }
+    }
+    else
+    {
+        ret = rand_queue_key[idx];
+        for (i = idx + 1; i < queue_len; i++)
+        {
+            rand_queue_key[i - 1] = rand_queue_key[i];
+        }
+    }
+    queue_len -= 1;
+
+    return ret;
+}
+
+script 1 OPEN
+{
+}
+
+script 2 ENTER
+{
+
+    int i;
+    map_level = GetLevelInfo (LEVELINFO_LEVELNUM);
+
+    // set player's position at spawn
+    if (random_spawn)
+    {
+        // spawn in random position
+        player_x = random(xmin, xmax);
+        player_y = random(ymin, ymax);
+        while(!SetActorPosition(0, player_x, player_y, 0.0, 0));
+        player_spawn_ok = 1;
+    }
+    else
+    {
+        // use absolute spawn position
+        player_x = abs_spawn_x;
+        player_y = abs_spawn_y;
+        player_spawn_ok = SetActorPosition(0, player_x, player_y, 0.0, 0);
+    }
+
+    // set player's view angle at spawn
+    if (random_spawn_angle)
+    {
+        SetActorAngle(0, random(0.0, 1.0));
+    }
+    else
+    {
+        SetActorAngle(0, spawn_angle);
+    }
+
+    // determine which object category will be the target
+    key_obj_idx = keys_used[Random(0, num_keys_used - 1)];
+
+    // reset number of objects spawned
+    num_obj_spawn = 0;
+
+    // select key obj textures
+    if (random_key_textures)
+    {
+        for (i = 0; i < num_keys; i++)
+        {
+            curr_key_textures[i] = Random(0, num_key_textures[i] - 1);
+        }
+    }
+    else
+    {
+        for (i = 0; i < num_keys; i++)
+        {
+            curr_key_textures[i] = default_key_textures[i];
+        }
+    }
+
+    // set key positions
+    if (random_key_positions)
+    {
+        if (use_key_boxes && shuffle_obj_pos)
+        {
+            init_queue(1);
+            for (i = 0; i < num_keys; i++)
+            {
+                SpawnKeyRandom(i, sample_wo_repl(1), key_textures[i][curr_key_textures[i]]);
+            }
+        }
+        else if (use_key_boxes)
+        {
+            for (i = 0; i < num_keys; i++)
+            {
+                SpawnKeyRandom(i, i, key_textures[i][curr_key_textures[i]]);
+            }
+        }
+        else
+        {
+            for (i = 0; i < num_keys; i++)
+            {
+                SpawnKeyRandom(i, -1, key_textures[i][curr_key_textures[i]]);
+            }
+        }
+    }
+    else if (shuffle_obj_pos)   // fixed position, but random objs in given positions
+    {
+        init_queue(0);
+        for (i = 0; i < num_keys; i++)
+        {
+            SpawnKeyAbsPos(i, sample_wo_repl(0));
+        }
+    }
+    else  // fixed position, fixed objs
+    {
+        for (i = 0; i < num_keys; i++)
+        {
+            SpawnKeyAbsPos(i, i);
+        }
+    }
+
+    reward = 0.0;
+
+    // set textures
+
+    str new_wall_texture, new_ceiling_texture, new_floor_texture;
+    if (random_wall_texture)
+        new_wall_texture = wall_texture_list[Random(0, num_wall_textures - 1)];
+    else
+        new_wall_texture = wall_texture_list[0];
+
+    if (random_floor_texture)
+        new_floor_texture = floor_texture_list[Random(0, num_floor_textures - 1)];
+    else
+        new_floor_texture = floor_texture_list[0];
+
+    if (random_ceiling_texture)
+        new_ceiling_texture = ceiling_texture_list[Random(0, num_ceiling_textures - 1)];
+    else
+        new_ceiling_texture = ceiling_texture_list[0];
+
+    _ReplaceTextures(new_wall_texture, new_ceiling_texture, new_floor_texture);
+
+    for (i = 0; i < num_keys; i++)
+    {
+        obj_exists[i] = True;
+    }
+    last_obj_picked = -1;
+
+    // debugPrint(); // DEBUG
+}
+
+// Script run every time target object is picked up
+script 5 (void)
+{
+    for (int i = 0; i < num_keys; i++)
+    {
+        if (obj_exists[i] && (!IsTIDUsed(target_id_offset + i)))
+        {
+            last_obj_picked = i;
+            obj_exists[i] = False;
+            break;
+        }
+    }
+    // Exit_Normal(0);
+    // restart;
+}
+
+// Script run every time non-target object is picked up
+script 6 (void)
+{
+    for (int i = 0; i < num_keys; i++)
+    {
+        if (obj_exists[i] && (!IsTIDUsed(target_id_offset + i)))
+        {
+            last_obj_picked = i;
+            obj_exists[i] = False;
+            break;
+        }
+    }
+}

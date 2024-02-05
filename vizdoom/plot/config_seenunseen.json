@@ -1,0 +1,86 @@
+{
+    "exp_note": "aaai2024 vizdoom",
+    "tasks": {
+        "success_rate": {
+            "min_updates": 100,
+            "max_updates": 2300000,
+            "interval": 5000,
+            "xaxis_bound": [0, 1000000],
+            "yaxis_bound": {
+                "seen": [-0.025, 0.8],
+                "unseen": [-0.025, 0.6]
+            },
+            "x_label": "Number of Updates",
+            "y_label": "Success Rate",
+            "use_legend": true,
+            "order": [
+                "onlysparse",
+                "S2D",
+                "D2S",
+                "onlydense"
+              ],
+            "colors": ["#479a5f", "#c1433c", "#a46750", "#5387dd", "yellow", "purple", "cyan"],
+            "file_names": {
+                "onlysparse": [
+                    "placeholder/path/to/log/onlysparse_rep1.csv",
+                    "placeholder/path/to/log/onlysparse_rep2.csv",
+                    "placeholder/path/to/log/onlysparse_rep3.csv"
+                ],
+                "S2D": [
+                    "placeholder/path/to/log/s2d_rep1.csv",
+                    "placeholder/path/to/log/s2d_rep2.csv",
+                    "placeholder/path/to/log/s2d_rep3.csv"
+                ],
+                "D2S": [
+                    "placeholder/path/to/log/d2s_rep1.csv",
+                    "placeholder/path/to/log/d2s_rep2.csv",
+                    "placeholder/path/to/log/d2s_rep3.csv"
+                ],
+                "onlydense": [
+                    "placeholder/path/to/log/onlydense_rep1.csv",
+                    "placeholder/path/to/log/onlydense_rep2.csv",
+                    "placeholder/path/to/log/onlydense_rep3.csv"
+                ]
+            }
+        },
+        "reward": {
+            "min_updates": 100,
+            "max_updates": 2300000,
+            "interval": 5000,
+            "xaxis_bound": [0, 1000000],
+            "yaxis_bound": [-1, 15],
+            "x_label": "Number of Updates",
+            "y_label": "Reward",
+            "use_legend": true,
+            "order": [
+                "onlysparse",
+                "S2D",
+                "D2S",
+                "onlydense"
+              ],
+            "colors": ["#479a5f", "#c1433c", "#a46750", "#5387dd", "yellow", "purple", "cyan"],
+            "file_names": {
+                "onlysparse": [
+                    "placeholder/path/to/log/onlysparse_rep1.csv",
+                    "placeholder/path/to/log/onlysparse_rep2.csv",
+                    "placeholder/path/to/log/onlysparse_rep3.csv"
+                ],
+                "S2D": [
+                    "placeholder/path/to/log/s2d_rep1.csv",
+                    "placeholder/path/to/log/s2d_rep2.csv",
+                    "placeholder/path/to/log/s2d_rep3.csv"
+                ],
+                "D2S": [
+                    "placeholder/path/to/log/d2s_rep1.csv",
+                    "placeholder/path/to/log/d2s_rep2.csv",
+                    "placeholder/path/to/log/d2s_rep3.csv"
+                ],
+                "onlydense": [
+                    "placeholder/path/to/log/onlydense_rep1.csv",
+                    "placeholder/path/to/log/onlydense_rep2.csv",
+                    "placeholder/path/to/log/onlydense_rep3.csv"
+                ]
+            }
+        }
+    }
+}

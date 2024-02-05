@@ -1,0 +1,3 @@
+[submodule "env/s2d_vizdoom/mazeenv/acc"]
+	path = env/s2d_vizdoom/mazeenv/acc
+	url = https://github.com/ZDoom/acc.git
