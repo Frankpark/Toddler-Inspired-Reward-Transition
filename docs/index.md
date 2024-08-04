@@ -8,27 +8,37 @@ Consider the journey of toddlers: they progress from free exploration with spars
 
 <div style="display: flex; flex-wrap: wrap; justify-content: center;">
     <div style="margin: 10px;">
-        <video width="400" controls>
+        <video width="200" autoplay loop>
             <source src="https://github.com/Frankpark/Toddler-Inspired-Reward-Transition/raw/main/docs/assets/videos/room-sparse.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div>
     <div style="margin: 10px;">
-        <video width="400" controls>
+        <video width="200" autoplay loop>
             <source src="https://github.com/Frankpark/Toddler-Inspired-Reward-Transition/raw/main/docs/assets/videos/room-dense-1.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div>
     <div style="margin: 10px;">
-        <video width="400" controls>
+        <video width="200" autoplay loop>
             <source src="https://github.com/Frankpark/Toddler-Inspired-Reward-Transition/raw/main/docs/assets/videos/room-s2d-1.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div>
     <div style="margin: 10px;">
-        <video width="400" controls>
+        <video width="200" autoplay loop>
             <source src="https://github.com/Frankpark/Toddler-Inspired-Reward-Transition/raw/main/docs/assets/videos/room-d2s.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div>
 </div>
+
+## Key findings
+- Transitioning from sparse-to-dense reward significantly improves learning outcomes, balancing exploration and exploitation to enhance success rates and sample efficiency.
+
+- The S2D reward transition smooths the policy loss landscape, promoting wider minima and enhancing generalization.
+
+- Agents' free exploration during the sparse reward phase forms good initial policy parameters, leading to more stable and faster learning when transitioning to dense rewards.
+
+- We developed custom 3D environments for egocentric scenarios, including ViZDoom and the minecraft mazes, specialized for generalization measures.
+
