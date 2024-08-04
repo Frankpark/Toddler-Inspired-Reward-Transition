@@ -95,7 +95,7 @@ figcaption {
 ## Reward transition inspired by toddlers
 
 <figure style="text-align: center; margin: 20px;">
-    <img src="https://github.com/Frankpark/Toddler-Inspired-Reward-Transition/raw/main/docs/assets/images/toddleranalogy.png" alt="Toddler Analogy">
+    <img src="https://github.com/Frankpark/Toddler-Inspired-Reward-Transition/raw/main/docs/assets/images/toddleranalogy.png" alt="A picture of a toddler room and its sparse, dense reward zone">
     <figcaption>
     (a) Toddlers transition from free exploration (sparse rewards) to goal-directed learning (dense rewards). (b) Agents mimic this by initially receiving sparse rewards, then transitioning to dense rewards based on proximity to the target.
 </figcaption>
@@ -115,7 +115,7 @@ The concept of reward transition in reinforcement learning is inspired by the de
 
 ## Experiments
 <figure style="text-align: center; margin: 20px;">
-    <img src="https://github.com/Frankpark/Toddler-Inspired-Reward-Transition/raw/main/docs/assets/images/natureenv.png" alt="Toddler Analogy">
+    <img src="https://github.com/Frankpark/Toddler-Inspired-Reward-Transition/raw/main/docs/assets/images/natureenv.png" alt="Pictures of environments">
     <figcaption>
     Performance and sharpness metrics from trials. S2D shows the best performance and widest minima, indicating improved generalization. Optimal reward transition timing is within the first third of training.
 </figcaption>
@@ -133,7 +133,7 @@ Through detailed ablation studies, we determined that the optimal timing for tra
 
 ## Results
 <figure style="text-align: center; margin: 20px;">
-    <img src="https://github.com/Frankpark/Toddler-Inspired-Reward-Transition/raw/main/docs/assets/images/naturemainfigv1.png" alt="Toddler Analogy">
+    <img src="https://github.com/Frankpark/Toddler-Inspired-Reward-Transition/raw/main/docs/assets/images/naturemainfigv1.png" alt="Graphs of average reward, success rate, average episode reached, and episode lengths of various environments">
     <figcaption>
     (a) Agent performance with various reward types in goal-oriented tasks. (1-3) LunarLander and UR5 show challenges with intrinsic rewards. (4-5) ViZDoom generalization performance with different rewards. (b) S2D agents in the Toddler Playroom maze show more completed episodes and higher success rates compared to other baselines.
     </figcaption>
@@ -147,45 +147,58 @@ The results of our experiments demonstrate the efficacy of the S2D (Sparse to De
 - **ViZDoom**: The generalization performance of agents was evaluated with various reward types, showing that S2D transitions lead to better generalization compared to other strategies.
 
 ### Performance in the Toddler Playroom Maze Environment
-- **Number of Episodes Completed** S2D agents completed more episodes over time compared to other reward strategies.
-- **Success Rates** Higher success rates were observed for S2D agents at different starting points, illustrating the robustness and effectiveness of the S2D transition in complex, visually rich environments mimicking a toddler's playroom.
+- **Number of Episodes Completed**: S2D agents completed more episodes over time compared to other reward strategies.
+- **Success Rates**: Higher success rates were observed for S2D agents at different starting points, illustrating the robustness and effectiveness of the S2D transition in complex, visually rich environments mimicking a toddler's playroom.
 
 
 <figure style="text-align: center; margin: 20px;">
-    <img src="https://github.com/Frankpark/Toddler-Inspired-Reward-Transition/raw/main/docs/assets/images/naturemainfigV2.png" alt="Toddler Analogy">
+    <img src="https://github.com/Frankpark/Toddler-Inspired-Reward-Transition/raw/main/docs/assets/images/naturemainfigV2.png" alt="Graphs of episode length and episode reached per global steps">
     <figcaption>
     (a) Episode lengths during training and evaluation for Goal Points 0, 1, and 2, showing more efficient learning with S2D. (b) Number of episodes completed and success rates, with S2D agents displaying superior sample efficiency and generalization across all scenarios.
 </figcaption>
 </figure>
 
-### Performance in the Cross Maze Environment
+### Performance in the Cross Map Maze Environment
 In our study, we evaluated the performance of agents using different reward strategies in the Cross Map maze environment. The results indicate significant improvements in learning efficiency and generalization for agents using the S2D (Sparse to Dense) reward transition.
 
-- **Episode Length** For Goal Points 0, 1, and 2, agents employing the S2D reward transition consistently achieved shorter episode lengths compared to other baselines. This indicates that S2D facilitates more efficient learning, allowing agents to complete tasks more quickly.
+- **Episode Length**: For Goal Points 0, 1, and 2, agents that use the S2D reward transition consistently achieved shorter episode lengths compared to other baselines. This indicates that S2D facilitates more efficient learning, allowing agents to complete tasks more quickly.
 
-- **Training Phases** S2D agents demonstrated higher sample efficiency, completing more episodes within the same training period.
-- **Evaluation Phases** During evaluation, S2D agents achieved higher success rates across all goal points, showcasing superior performance and better generalization to unseen goal positions.
+- **Training Phases**: S2D agents demonstrated higher sample efficiency, completing more episodes within the same training period.
+
+- **Evaluation Phases**: During evaluation, S2D agents achieved higher success rates across all goal points, showcasing superior performance and better generalization to unseen goal positions.
 
 ## Analysis
 
 The analysis focuses on the visualizations of agent trajectories and feature analysis in various maze environments. This helps understanding the impact of different reward strategies on agent behavior and learning efficiency.
 
+<figure style="text-align: center; margin: 20px;">
+    <img src="https://github.com/Frankpark/Toddler-Inspired-Reward-Transition/raw/main/docs/assets/images/natureanalysis.png" alt="Trajectory images in toddler room maze and cross maze, and analysis results">
+    <figcaption>
+    (a) S2D and Sparse agents exhibit diverse trajectories, enhancing learning; Dense agents show straight paths. (b) S2D agents achieve shorter paths in Cross Maze. (c) RNN features converge faster with sparse rewards initially; S2D agents maintain stable actions.
+</figcaption>
+</figure>
+
 ### Toddler Playroom Maze Trajectories
-Exploration Paths: In the top row, the trajectories of agents with S2D and Only Sparse rewards are diverse and exploratory, allowing for robust learning about the environment and objects from various angles. Conversely, agents with Dense rewards show more straightforward trajectories, indicating limited exploration and a focus on quickly reaching the goal.
-Shortest Paths: The bottom row illustrates the most frequent shortest paths. S2D agents demonstrate more efficient and direct paths to the goal compared to other reward settings.
+- **Exploration Paths**: In the top row, the trajectories of agents with S2D and Only Sparse rewards are diverse and exploratory, allowing for robust learning about the environment and objects from various angles. Conversely, agents with Dense rewards show more straightforward trajectories, indicating limited exploration and a focus on quickly reaching the goal.
+
+- **Shortest Paths**: The bottom row illustrates the most frequent shortest paths. S2D agents demonstrate more efficient and direct paths to the goal compared to other reward settings.
 
 ### Cross Maze Trajectories
 Similar to the Toddler Playroom maze, the S2D agents in the Cross Maze achieve shorter and more efficient paths compared to other reward settings, reinforcing the benefits of the S2D strategy.
 
 ### RNN Feature and Action Analysis
-Feature Convergence: The left graph shows the mean distance between RNN features during training, with a noticeable convergence occurring at the 3 million steps mark, especially in the region highlighted in red. This suggests that initial learning with sparse rewards provides a good foundation for parameter optimization.
-Action Distributions: The right plots depict the distribution of actions (straight, left, right) taken by agents. S2D agents maintain stable action patterns after the transition, highlighting improved policy stability and control.
+- **Feature Convergence**: The left graph shows the mean distance between RNN features during training, with a noticeable convergence occurring at the 3 million steps mark, especially in the region highlighted in red. This suggests that initial learning with sparse rewards provides a good foundation for parameter optimization.
+- **Action Distributions**: The right plots shows the distribution of actions (straight, left, right) taken by agents. S2D agents maintain stable action patterns after the transition, highlighting improved policy stability and control.
+
+
+## Supplementary Videos
+You can download the supplementary videos from the following links:
+
+- Video 1: Toddler Playroom Maze Trajectories + Ego-centric View
+    - [Download Video](https://github.com/Frankpark/Toddler-Inspired-Reward-Transition/raw/main/docs/assets/videos/s2d-room-movie-speedup.mp4)
+- Video 2: Cross Maze Trajectories + Ego-centric View
+    - [Download Video](https://github.com/Frankpark/Toddler-Inspired-Reward-Transition/raw/main/docs/assets/videos/s2d-cross-movie-speedup.mp4)
 
 
 
-<figure style="text-align: center; margin: 20px;">
-    <img src="https://github.com/Frankpark/Toddler-Inspired-Reward-Transition/raw/main/docs/assets/images/natureanalysis.png" alt="Toddler Analogy">
-    <figcaption>
-    (a) S2D and Sparse agents exhibit diverse trajectories, enhancing learning; Dense agents show straight paths. (b) S2D agents achieve shorter paths in Cross Maze. (c) RNN features converge faster with sparse rewards initially; S2D agents maintain stable actions.
-</figcaption>
 </figure>
