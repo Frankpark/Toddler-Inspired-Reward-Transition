@@ -6,9 +6,29 @@ Consider the journey of toddlers: they progress from free exploration with spars
 
 ## Videos
 
-<div align="center">
-    <video width="600" controls>
-        <source src="https://github.com/Frankpark/Toddler-Inspired-Reward-Transition/raw/main/docs/assets/videos/s2d.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
+<div style="display: flex; flex-wrap: wrap; justify-content: center;">
+    <div style="margin: 10px;">
+        <video width="400" controls>
+            <source src="https://github.com/Frankpark/Toddler-Inspired-Reward-Transition/raw/main/docs/assets/videos/room-sparse.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div style="margin: 10px;">
+        <video width="400" controls>
+            <source src="https://github.com/Frankpark/Toddler-Inspired-Reward-Transition/raw/main/docs/assets/videos/room-dense-1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div style="margin: 10px;">
+        <video width="400" controls>
+            <source src="https://github.com/Frankpark/Toddler-Inspired-Reward-Transition/raw/main/docs/assets/videos/room-s2d-1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div style="margin: 10px;">
+        <video width="400" controls>
+            <source src="https://github.com/Frankpark/Toddler-Inspired-Reward-Transition/raw/main/docs/assets/videos/room-d2s.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
 </div>
