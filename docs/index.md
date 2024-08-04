@@ -8,7 +8,7 @@ Consider the journey of toddlers: they progress from free exploration with spars
 
 <div align="center">
     <video width="600" controls>
-        <source src="{{ site.baseurl }}/docs/assets/videos/s2d.mp4" type="video/mp4">
+        <source src="https://github.com/Frankpark/Toddler-Inspired-Reward-Transition/raw/main/docs/assets/videos/s2d.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
 </div>
