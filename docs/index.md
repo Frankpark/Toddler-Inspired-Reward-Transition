@@ -4,7 +4,7 @@
 
 Consider the journey of toddlers: they progress from free exploration with sparse feedback to goal-directed learning with denser rewards. Inspired by this phenomenon, we aim to explore the <b>Toddler-Inspired Reward Transition</b> in goal-oriented reinforcement learning (RL) tasks. Our primary focus is on <i>transitioning from sparse to potential-based dense (S2D) rewards</i> while maintaining optimal strategies. Through a series of experiments, including dynamic robotic arm manipulation tasks and egocentric 3D navigation tasks, our results show that proper S2D reward transitions are key to enhancing learning performance and sample efficiency, thereby balancing exploration and exploitation more effectively. As part of our analysis, we offer a novel interpretation of Tolman's maze experiments, emphasizing the importance of free exploratory learning in the initial stages. Furthermore, using our Cross-Density Visualizer. we discover that S2D reward transitions smooth the policy loss landscape, promoting wide minima, which significantly enhances generalization.
 
-## Videos
+## Examplar Egocentric Videos
 
 <style>
 .styled-figure {
@@ -37,7 +37,7 @@ figcaption {
     </figure>
     <figure style="margin: 5px;">
         <video width="200" autoplay loop muted>
-            <source src="https://github.com/Frankpark/Toddler-Inspired-Reward-Transition/raw/main/docs/assets/videos/room-s2d-1.mp4" type="video/mp4">
+            <source src="https://github.com/Frankpark/Toddler-Inspired-Reward-Transition/raw/main/docs/assets/videos/room-s2d-2.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
         <figcaption><center>S2D</center></figcaption>
@@ -51,6 +51,37 @@ figcaption {
     </figure>
 </div>
 
+## Trajectroy Videos (Most common cases)
+<div style="display: flex; flex-wrap: wrap; justify-content: center;">
+    <figure style="margin: 5px;">
+        <video width="200" autoplay loop muted>
+            <source src="https://github.com/Frankpark/Toddler-Inspired-Reward-Transition/raw/main/docs/assets/videos/room-sparse-traj.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <figcaption><center>Only Sparse</center></figcaption>
+    </figure>
+    <figure style="margin: 5px;">
+        <video width="200" autoplay loop muted>
+            <source src="https://github.com/Frankpark/Toddler-Inspired-Reward-Transition/raw/main/docs/assets/videos/room-dense-1-traj.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <figcaption><center>Only Dense</center></figcaption>
+    </figure>
+    <figure style="margin: 5px;">
+        <video width="200" autoplay loop muted>
+            <source src="https://github.com/Frankpark/Toddler-Inspired-Reward-Transition/raw/main/docs/assets/videos/room-s2d-2-traj.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <figcaption><center>S2D</center></figcaption>
+    </figure>
+    <figure style="margin: 5px;">
+        <video width="200" autoplay loop muted>
+            <source src="https://github.com/Frankpark/Toddler-Inspired-Reward-Transition/raw/main/docs/assets/videos/room-d2s-traj.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <figcaption><center>D2S</center></figcaption>
+    </figure>
+</div>
 
 ## Key findings
 - Transitioning from sparse-to-dense reward significantly improves learning outcomes, balancing exploration and exploitation to enhance success rates and sample efficiency.
