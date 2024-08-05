@@ -18,7 +18,33 @@ figcaption {
     font-size: 12px;
     margin-top: 3px;
 }
+
+.warning {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+    margin: 20px;
+}
+
+.toggle-button {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+
+.toggle-button button {
+    padding: 10px 20px;
+    font-size: 16px;
+}
 </style>
+
+<div class="warning">
+        <p>Warning: The D2S video contains flashing lights that may trigger photosensitive seizures.</p>
+    </div>
+
+    <div class="toggle-button">
+    <button onclick="toggleD2SVideo()">Toggle D2S Video</button>
+</div>
 
 <div style="display: flex; flex-wrap: wrap; justify-content: center;">
     <figure style="margin: 5px;">
@@ -49,6 +75,17 @@ figcaption {
         </video>
         <figcaption><center>D2S</center></figcaption>
     </figure>
+
+    <script>
+        function toggleD2SVideo() {
+            const d2sVideo = document.getElementById('d2s-video');
+            if (d2sVideo.style.display === 'none') {
+                d2sVideo.style.display = 'block';
+            } else {
+                d2sVideo.style.display = 'none';
+            }
+        }
+    </script>
 </div>
 
 ## Trajectory Videos (Most common cases)
