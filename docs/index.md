@@ -40,9 +40,9 @@ figcaption {
 
 <div class="warning">
         <p>Warning: The D2S video contains flashing lights that may trigger photosensitive seizures.</p>
-    </div>
+</div>
 
-    <div class="toggle-button">
+<div class="toggle-button">
     <button onclick="toggleD2SVideo()">Toggle D2S Video</button>
 </div>
 
@@ -68,7 +68,7 @@ figcaption {
         </video>
         <figcaption><center>S2D</center></figcaption>
     </figure>
-    <figure style="margin: 5px;">
+    <figure style="margin: 5px; display: none;">
         <video width="200" autoplay loop muted>
             <source src="https://github.com/Frankpark/Toddler-Inspired-Reward-Transition/raw/main/docs/assets/videos/room-d2s.mp4" type="video/mp4">
             Your browser does not support the video tag.
@@ -76,16 +76,18 @@ figcaption {
         <figcaption><center>D2S</center></figcaption>
     </figure>
 
-    <script>
-        function toggleD2SVideo() {
-            const d2sVideo = document.getElementById('d2s-video');
-            if (d2sVideo.style.display === 'none') {
-                d2sVideo.style.display = 'block';
-            } else {
-                d2sVideo.style.display = 'none';
-            }
+<script>
+
+
+    function toggleD2SVideo() {
+        const d2sVideo = document.getElementById('d2s-video');
+        if (d2sVideo.style.display === 'none') {
+            d2sVideo.style.display = 'block';
+        } else {
+            d2sVideo.style.display = 'none';
         }
-    </script>
+    }
+</script>
 </div>
 
 ## Trajectory Videos (Most common cases)
