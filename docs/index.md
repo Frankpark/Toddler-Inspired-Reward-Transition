@@ -68,7 +68,7 @@ figcaption {
         </video>
         <figcaption><center>S2D</center></figcaption>
     </figure>
-    <figure style="margin: 5px; display: none;">
+    <figure id="d2s-video" style="margin: 5px; display: none;">
         <video width="200" autoplay loop muted>
             <source src="https://github.com/Frankpark/Toddler-Inspired-Reward-Transition/raw/main/docs/assets/videos/room-d2s.mp4" type="video/mp4">
             Your browser does not support the video tag.
@@ -77,16 +77,14 @@ figcaption {
     </figure>
 
 <script>
-
-
-    function toggleD2SVideo() {
-        const d2sVideo = document.getElementById('d2s-video');
-        if (d2sVideo.style.display === 'none') {
-            d2sVideo.style.display = 'block';
-        } else {
-            d2sVideo.style.display = 'none';
-        }
+function toggleD2SVideo() {
+    const d2sVideo = document.getElementById('d2s-video');
+    if (d2sVideo.style.display === 'none') {
+        d2sVideo.style.display = 'block';
+    } else {
+        d2sVideo.style.display = 'none';
     }
+}
 </script>
 </div>
 
