@@ -198,5 +198,3 @@ You can download the supplementary videos from the following links:
     - [Download Video](https://github.com/Frankpark/Toddler-Inspired-Reward-Transition/raw/main/docs/assets/videos/s2d-room-movie-speedup.mp4)
 - Video 2: Cross Maze Trajectories + Ego-centric View
     - [Download Video](https://github.com/Frankpark/Toddler-Inspired-Reward-Transition/raw/main/docs/assets/videos/s2d-cross-movie-speedup.mp4)
-
-# hello.
