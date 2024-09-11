@@ -180,6 +180,7 @@ The results of our experiments demonstrate the efficacy of the S2D (Sparse to De
 
 ### Performance in Goal-Oriented Tasks
 - **LunarLander**: The accumulated reward from intrinsic rewards was significantly below zero, as indicated by the dashed line, highlighting the challenges with intrinsic rewards alone.
+- **CartPole**: S2D agents showed a clear advantage, outperforming other reward strategies in terms of success rate. Although intrinsic rewards exhibited comparable performance to S2D during early exploration, S2D ultimately led to more consistent performance gains.
 - **UR5**: Both intrinsic motivation and sparse reward settings resulted in near-zero performance, making it challenging to observe substantial learning.
 - **ViZDoom**: The generalization performance of agents was evaluated with various reward types, showing that S2D transitions lead to better generalization compared to other strategies.
 
