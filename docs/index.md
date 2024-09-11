@@ -4,7 +4,7 @@
 
 Consider the journey of toddlers: they progress from free exploration with sparse feedback to goal-directed learning with denser rewards. Inspired by this phenomenon, we aim to explore the <b>Toddler-Inspired Reward Transition</b> in goal-oriented reinforcement learning (RL) tasks. Our primary focus is on <i>transitioning from sparse to potential-based dense (S2D) rewards</i> while maintaining optimal strategies. Through a series of experiments, including dynamic robotic arm manipulation tasks and egocentric 3D navigation tasks, our results show that proper S2D reward transitions are key to enhancing learning performance and sample efficiency, thereby balancing exploration and exploitation more effectively. As part of our analysis, we offer a novel interpretation of Tolman's maze experiments, emphasizing the importance of free exploratory learning in the initial stages. Furthermore, using our Cross-Density Visualizer, we discover that S2D reward transitions smooth the policy loss landscape, promoting wide minima, which significantly enhances generalization.
 
-## Exemplar Egocentric Videos
+## Exemplar Egocentric Videos (Corresponds to Trajectories After Training Completion)
 
 <style>
 .styled-figure {
@@ -88,7 +88,7 @@ function toggleD2SVideo() {
 </script>
 </div>
 
-## Trajectory Videos (Most common cases)
+## Trajectory Videos (Most Common Cases After Training Completion - Corresponding to Exemplar Videos)
 <div style="display: flex; flex-wrap: wrap; justify-content: center;">
     <figure style="margin: 5px;">
         <video width="200" autoplay loop muted>
@@ -119,6 +119,10 @@ function toggleD2SVideo() {
         <figcaption><center>D2S</center></figcaption>
     </figure>
 </div>
+
+
+<figcaption><center>The trajectory videos (final behavior) show that S2D agents take the shortest and most direct paths toward the goal, unlike sparse-only agents that tend to explore more and dense-only agents that take straight paths. S2D provides a balance that leads to more efficient learning by combining exploration and exploitation.</center></figcaption>
+
 
 These videos illustrate how agents perform under different reward schemes. Agents using the S2D (Sparse to Dense) reward transition strategy display more diverse and exploratory behaviors in the early stages, similar to agents with only sparse rewards. This exploration allows for more robust learning about the environment. As the dense rewards guide agents later in training, S2D agents demonstrate smoother and more efficient paths towards the goal, in contrast to the more limited exploration of agents with dense-only rewards.
 
