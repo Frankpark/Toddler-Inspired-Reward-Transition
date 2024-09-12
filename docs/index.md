@@ -120,13 +120,15 @@ function toggleD2SVideo() {
     </figure>
 </div>
 
+<figure style="text-align: center; margin: 20px;">
+    <img src="https://github.com/Frankpark/Toddler-Inspired-Reward-Transition/raw/main/docs/assets/images/natureanalysis_diverse.png" alt="Diverse trajectories">
+    <figcaption>
+    <center>
+    The trajectory videos (final behavior) show that **S2D agents** eventually take the shortest and most direct paths to the goal, balancing exploration and exploitation. Early in training, they exhibit diverse, exploratory paths similar to sparse-only agents. This initial exploration helps build a better understanding of the environment, which transitions into more efficient behavior as dense rewards guide their trajectories.
+    </center>
+    </figcaption>
+</figure>
 
-<figcaption><center>The trajectory videos (final behavior) show that S2D agents take the shortest and most direct paths toward the goal, unlike sparse-only agents that tend to explore more and dense-only agents that take straight paths. S2D provides a balance that leads to more efficient learning by combining exploration and exploitation.</center></figcaption>
-
-
-These videos illustrate how agents perform under different reward schemes. Agents using the S2D (Sparse to Dense) reward transition strategy display more diverse and exploratory behaviors in the early stages, similar to agents with only sparse rewards. This exploration allows for more robust learning about the environment. As the dense rewards guide agents later in training, S2D agents demonstrate smoother and more efficient paths towards the goal, in contrast to the more limited exploration of agents with dense-only rewards.
-
-The trajectories show that S2D agents take the shortest and most direct paths toward the goal. While sparse-only agents explore more, and dense-only agents take straight paths, S2D provides a balance that leads to more efficient learning. The S2D reward transition helps agents maintain stable and effective trajectories by leveraging both exploration and exploitation, resulting in higher success rates and better generalization across different scenarios.
 
 ## Key findings
 - Transitioning from sparse-to-dense reward significantly improves learning outcomes, balancing exploration and exploitation to enhance success rates and sample efficiency.
