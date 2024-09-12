@@ -124,7 +124,7 @@ function toggleD2SVideo() {
     <img src="https://github.com/Frankpark/Toddler-Inspired-Reward-Transition/raw/main/docs/assets/images/natureanalysis_diverse.png" alt="Diverse trajectories">
     <figcaption>
     <center>
-    The trajectory videos (final behavior) show that **S2D agents** eventually take the shortest and most direct paths to the goal, balancing exploration and exploitation. Early in training, they exhibit diverse, exploratory paths similar to sparse-only agents. This initial exploration helps build a better understanding of the environment, which transitions into more efficient behavior as dense rewards guide their trajectories.
+    The trajectory videos (final behavior) show that **S2D agents** eventually take the shortest and most direct paths to the goal, balancing exploration and exploitation. Early in training, they exhibit diverse, exploratory paths similar to sparse-only agents. In contrast, **dense-only agents** display rigid, straight-line behaviors even in the early stages of training. This leads to less exploration and a limited understanding of the environment. S2D agents, however, actively explore in the early stages, which enables them to transition into more efficient and goal-oriented behavior as dense rewards guide their trajectories later in training.
     </center>
     </figcaption>
 </figure>
